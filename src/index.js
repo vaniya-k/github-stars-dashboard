@@ -1,8 +1,5 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import App from './components/App';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/App.jsx';
 
-// ReactDOM.render(<App/>,document.getElementById(`root`));
-
-const bodyElement = document.querySelector(`body`);
-bodyElement.textContent = `Hello, hello, hello!`;
+ReactDOM.render(<App/>,document.getElementById(`root`));
