@@ -9,6 +9,7 @@ const useFetchJson = (url, query) => {
   useEffect(() => {
     fetch(url + query)
       .then(setLoading(true))
+      .then(setError(null))
       .then(response => {
         if(response.ok){
           return response.json()
