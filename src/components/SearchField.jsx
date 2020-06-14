@@ -18,7 +18,7 @@ const SearchField = ({processSearchQuery}) => {
       <label htmlFor="search">Type your search query here:&nbsp;&nbsp;</label>
       <input type="text" id="search" placeholder="hit Enter to submit" ref={inputRef} onKeyDown={handleEnterPress}></input>
     </form>
-  )
+  );
 };
 
 export default SearchField;
