@@ -8,7 +8,8 @@ const searchResponseAdapter = (apiReturn) => {
       name: item.name,
       starsCount: item.stargazers_count,
       lastCommit: item.pushed_at.slice(0, 10),
-      url: item.html_url
+      url: item.html_url,
+      forksCount: item.forks_count
     }
   };
  

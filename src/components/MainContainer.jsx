@@ -3,30 +3,34 @@ import SearchField from './SearchField.jsx';
 import List from './List.jsx';
 import Paginator from './Paginator.jsx';
 import {preserveQueryInSession, getSearchRequestFromSession, getPageNumberFromSession} from '../utils/sessionStorageManager.js';
-import useFetchJson from '../utils/useFetchJson.js';
+import useJsonFetch from '../utils/useJsonFetch.js';
 import searchResponseAdapter from '../utils/searchResponseAdapter.js';
 
 const BASE_API_URL = `https://api.github.com/search/repositories`;
 const TOP_TEN_SEARCH_STRING = `?q=stars:>=100000&sort=stars&per_page=10&page=1`;
 
-const MainContainer = () => {
+const MainContainer = () => {  
+  const [apiSearchString, setApiSearchString] = useState(``);
+  const [loadingResults, apiResults, errorLoadingResults, resultsTotalCount, resetResultsTotalCount] = useJsonFetch(BASE_API_URL, apiSearchString);
+  const [loadingTopTen, apiTopTen, errorLoadingTopTen] = useJsonFetch(BASE_API_URL, TOP_TEN_SEARCH_STRING);
+
   const [searchRequest, setSearchRequest] = useState(``);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [pagesCount, setPagesCount] = useState(0);
+
   const [listTitle, setListTitle] = useState(``);
   const [itemsToShow, setItemsToShow] = useState(null);
-  const [apiSearchString, setApiSearchString] = useState(``);
-  const [loadingResults, apiResults, errorLoadingResults, resultsTotalCount, resetResultsTotalCount] = useFetchJson(BASE_API_URL, apiSearchString);
-  const [loadingTopTen, apiTopTen, errorLoadingTopTen] = useFetchJson(BASE_API_URL, TOP_TEN_SEARCH_STRING);
+  
+  const [pageNumber, setPageNumber] = useState(1);
+  const [pagesCount, setPagesCount] = useState(0);
 
   const handleSearchSubmit = (newVal) => {
     if(newVal !== searchRequest && newVal !== ``) {
       resetResultsTotalCount();
       setSearchRequest(newVal);
       setPageNumber(1);
-      preserveQueryInSessionStorage(newVal, `1`);
+      preserveQueryInSession(newVal, `1`);
       setApiSearchString(`?q=${newVal}&sort=stars&per_page=10&page=1`);
     } else if(newVal !== searchRequest && newVal === ``) {
+      resetResultsTotalCount();
       setSearchRequest(newVal);
     }
   };
@@ -51,7 +55,7 @@ const MainContainer = () => {
     if((searchRequest === `` && loadingTopTen) || (searchRequest !== `` && loadingResults)) {
       setListTitle(`Loading...`)
     } else if ((searchRequest === `` && errorLoadingTopTen) || (searchRequest !== `` && errorLoadingResults)) {
-      setListTitle(`Error! Check your internet access and hit F5.. Or you need to wait due to the API's limits..`)
+      setListTitle(`Error! Check your internet access and hit F5.. Or you need to wait a bit or two due to the API's limits..`)
     } else if (searchRequest === ``) {
       setListTitle(`Top 10 repos with most stars overall`)
     } else if (resultsTotalCount > 100) {
@@ -80,11 +84,11 @@ const MainContainer = () => {
   }, [resultsTotalCount]);
 
   return (
-    <>
-    <SearchField onSearchSubmit={handleSearchSubmit}/>
-    <List listTitle={listTitle} itemsToShow={itemsToShow}/>
-    {(pagesCount > 0) && <Paginator pagesCount={pagesCount} pageNumber={pageNumber} onPageNumberChange={handlePageNumberChange}/>}
-    </>
+    <div style={{width: `700px`, height: `350px`, border: `2px solid grey`, padding: `25px`}}>
+      <SearchField onSearchSubmit={handleSearchSubmit}/>
+      <List listTitle={listTitle} itemsToShow={itemsToShow}/>
+      {(pagesCount > 0) && <Paginator pagesCount={pagesCount} pageNumber={pageNumber} onPageNumberChange={handlePageNumberChange}/>}
+    </div>
   );
 };
 

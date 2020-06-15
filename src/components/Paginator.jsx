@@ -1,5 +1,7 @@
 import React from 'react';
 
+const buttonNames = [`1..10`, `11..20`, `21..30`, `31..40`, `41..50`, `51..60`, `61..70`, `71..80`, `81..90`, `91..100`]
+
 const Paginator = ({pagesCount, pageNumber, onPageNumberChange}) => {
   const buildButtonsArray = (pagesCount, pageNumber) => {
     const buttons = [];
@@ -11,11 +13,11 @@ const Paginator = ({pagesCount, pageNumber, onPageNumberChange}) => {
             onClick={() => onPageNumberChange(i + 1)}
             style={
               (pageNumber === (i + 1))
-              ? {backgroundColor: `grey`, padding: `3px 6px`, outline: `2px solid grey`, cursor: `pointer`}
-              : {padding: `3px 6px`, outline: `2px solid grey`, cursor: `pointer`}
+              ? {backgroundColor: `grey`, padding: `2px 4px`, outline: `2px solid grey`, cursor: `pointer`, fontSize: `11px`}
+              : {padding: `2px 4px`, outline: `2px solid grey`, cursor: `pointer`, fontSize: `11px`}
             }
           >
-            {`${(i + 1)}`}
+            {buttonNames[i]}
           </div>
         </li>
       )
@@ -25,9 +27,11 @@ const Paginator = ({pagesCount, pageNumber, onPageNumberChange}) => {
   };
 
   return (
-    <ul style={{listStyleType: `none`}}>
+    <div style={{width: `100%`, display: `flex`, justifyContent: `center`}}>
+      <ul style={{listStyleType: `none`, padding: `0`}}>
       {buildButtonsArray(pagesCount, pageNumber)}
-    </ul>
+      </ul>
+    </div> 
   );
 };
 
