@@ -6,13 +6,10 @@ import {preserveQueryInSession, getSearchRequestFromSession, getPageNumberFromSe
 import useJsonFetch from '../utils/useJsonFetch.js';
 import searchResponseAdapter from '../utils/searchResponseAdapter.js';
 
-const BASE_API_URL = `https://api.github.com/search/repositories`;
-const TOP_TEN_SEARCH_STRING = `?q=stars:>=100000&sort=stars&per_page=10&page=1`;
-
-const MainContainer = () => {  
+const MainPageContainer = () => {  
   const [apiSearchString, setApiSearchString] = useState(``);
-  const [loadingResults, apiResults, errorLoadingResults, resultsTotalCount, resetResultsTotalCount] = useJsonFetch(BASE_API_URL, apiSearchString);
-  const [loadingTopTen, apiTopTen, errorLoadingTopTen] = useJsonFetch(BASE_API_URL, TOP_TEN_SEARCH_STRING);
+  const [loadingResults, apiResults, errorLoadingResults, resultsTotalCount, resetResultsTotalCount] = useJsonFetch(`https://api.github.com/search/repositories`, apiSearchString);
+  const [loadingTopTen, apiTopTen, errorLoadingTopTen] = useJsonFetch(`https://api.github.com/search/repositories`, `?q=stars:>=100000&sort=stars&per_page=10&page=1`);
 
   const [searchRequest, setSearchRequest] = useState(``);
 
@@ -92,4 +89,4 @@ const MainContainer = () => {
   );
 };
 
-export default MainContainer;
+export default MainPageContainer;
