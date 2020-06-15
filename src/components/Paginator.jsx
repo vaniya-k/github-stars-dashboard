@@ -1,16 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
-const Paginator = ({resultsTotalCount, pageNumber, onPageNumberChange}) => {
-  const [pagesCount, setPagesCount] = useState(null)
-
-  useEffect(() => {
-    if (resultsTotalCount < 91) {
-      setPagesCount(Number.parseInt(resultsTotalCount / 10))
-    } else {
-      setPagesCount(10)
-    }
-  }, [resultsTotalCount])
-
+const Paginator = ({pagesCount, pageNumber, onPageNumberChange}) => {
   const buildButtonsArray = (pagesCount, pageNumber) => {
     const buttons = [];
 
