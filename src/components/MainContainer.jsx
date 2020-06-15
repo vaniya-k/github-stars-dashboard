@@ -15,13 +15,15 @@ const MainContainer = () => {
   const [listTitle, setListTitle] = useState(``);
   const [itemsToShow, setItemsToShow] = useState(null);
   const [apiSearchString, setApiSearchString] = useState(``);
-  const [loadingResults, apiResults, errorLoadingResults, resultsTotalCount] = useFetchJson(BASE_API_URL, apiSearchString);
+  const [loadingResults, apiResults, errorLoadingResults, resultsTotalCount, resetResultsTotalCount] = useFetchJson(BASE_API_URL, apiSearchString);
   const [loadingTopTen, apiTopTen, errorLoadingTopTen] = useFetchJson(BASE_API_URL, TOP_TEN_SEARCH_STRING);
 
   const handleSearchSubmit = (newVal) => {
     if(newVal !== searchRequest && newVal !== ``) {
+      resetResultsTotalCount();
       setSearchRequest(newVal);
-      setApiSearchString(`?q=${newVal}&sort=stars&per_page=10&page=${pageNumber}`);
+      setPageNumber(1);
+      setApiSearchString(`?q=${newVal}&sort=stars&per_page=10&page=1`);
     } else if(newVal !== searchRequest && newVal === ``) {
       setSearchRequest(newVal);
     }
@@ -31,16 +33,6 @@ const MainContainer = () => {
     if(newVal !== pageNumber) {
       setPageNumber(newVal);
       setApiSearchString(`?q=${searchRequest}&sort=stars&per_page=10&page=${newVal}`);
-    }
-  };
-
-  const checkPaginatorNecessity = () => {
-    if(searchRequest === `` || loadingResults || loadingTopTen || errorLoadingResults || errorLoadingTopTen) {
-      return false
-    } else if(resultsTotalCount < 10) {
-      return false
-    } else {
-      return true
     }
   };
 
@@ -67,10 +59,12 @@ const MainContainer = () => {
   }, [searchRequest, apiResults, apiTopTen]);
 
   useEffect(() => {
-    if (resultsTotalCount < 91) {
+    if (resultsTotalCount < 11) {
+      setPagesCount(0);
+    } else if (resultsTotalCount < 91) {
       setPagesCount(Number.parseInt(resultsTotalCount / 10))
     } else {
-      setPagesCount(10)
+      setPagesCount(10);
     }
   }, [resultsTotalCount]);
 
@@ -78,7 +72,7 @@ const MainContainer = () => {
     <>
     <SearchField onSearchSubmit={handleSearchSubmit}/>
     <List listTitle={listTitle} itemsToShow={itemsToShow}/>
-    {checkPaginatorNecessity() && <Paginator pagesCount={pagesCount} pageNumber={pageNumber} onPageNumberChange={handlePageNumberChange}/>}
+    {(pagesCount > 0) && <Paginator pagesCount={pagesCount} pageNumber={pageNumber} onPageNumberChange={handlePageNumberChange}/>}
     </>
   );
 };

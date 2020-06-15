@@ -4,14 +4,17 @@ const useFetchJson = (baseUrl, queryString) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
-  const [totalCount, setTotalCount] = useState(null);
+  const [totalCount, setTotalCount] = useState(0);
+
+  const resetTotalCount = () => {
+    setTotalCount(0);
+  }
 
   useEffect(() => {
     if(queryString !== ``) {
       fetch(baseUrl + queryString)
       .then(setLoading(true))
       .then(setError(null))
-      .then(setTotalCount(null))
       .then(response => {
         if(response.ok){
           return response.json()
@@ -33,7 +36,7 @@ const useFetchJson = (baseUrl, queryString) => {
     }
   }, [queryString]);
 
-  return [loading, data, error, totalCount];
+  return [loading, data, error, totalCount, resetTotalCount];
 };
 
 export default useFetchJson;
