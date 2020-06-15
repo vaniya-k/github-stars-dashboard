@@ -14,12 +14,12 @@ const RepoDetails = ({title, starsCount, lastCommit, ownerAvaUrl, ownerUrl, owne
 
       <div>
         <h4 style={{marginBottom: `10px`, marginTop: `25px`}}>Languages:</h4>
-        <span>{languagesList.length === 0 ? `None specified` : languagesList}</span>
+        <span>{(languagesList === `` || languagesList === null) ? `None specified` : languagesList}</span>
       </div>
 
       <div>
         <h4 style={{marginBottom: `10px`, marginTop: `25px`}}>Description:</h4>
-        <span>{description.length === 0 ? `None specified` : description}</span>
+        <span>{(description === `` || description === null) ? `None specified` : description}</span>
       </div>
 
       <div>
