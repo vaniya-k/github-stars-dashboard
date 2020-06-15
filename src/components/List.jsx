@@ -10,7 +10,7 @@ const List = ({listTitle, itemsToShow}) => {
   return (
     <>
       <h4>{listTitle}</h4>
-      {(itemsToShow.length !== 0) && <ul>{itemsToShow.map(item => <LiItem key={item.id} item={item}/>)}</ul>}
+      {(itemsToShow !== null) && <ul>{itemsToShow.map(item => <LiItem key={item.id} item={item}/>)}</ul>}
     </>
   );
 };
