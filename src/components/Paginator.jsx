@@ -22,7 +22,7 @@ const Paginator = ({pagesCount, pageNumber, onPageNumberChange}) => {
     };
 
     return buttons;
-  }
+  };
 
   return (
     <ul style={{listStyleType: `none`}}>

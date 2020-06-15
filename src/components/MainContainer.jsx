@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import SearchField from './SearchField.jsx';
 import List from './List.jsx';
 import Paginator from './Paginator.jsx';
+import {preserveQueryInSession, getSearchRequestFromSession, getPageNumberFromSession} from '../utils/sessionStorageManager.js';
 import useFetchJson from '../utils/useFetchJson.js';
 import searchResponseAdapter from '../utils/searchResponseAdapter.js';
 
@@ -23,6 +24,7 @@ const MainContainer = () => {
       resetResultsTotalCount();
       setSearchRequest(newVal);
       setPageNumber(1);
+      preserveQueryInSessionStorage(newVal, `1`);
       setApiSearchString(`?q=${newVal}&sort=stars&per_page=10&page=1`);
     } else if(newVal !== searchRequest && newVal === ``) {
       setSearchRequest(newVal);
@@ -32,21 +34,30 @@ const MainContainer = () => {
   const handlePageNumberChange = (newVal) => {
     if(newVal !== pageNumber) {
       setPageNumber(newVal);
+      preserveQueryInSession(searchRequest, `${newVal}`);
       setApiSearchString(`?q=${searchRequest}&sort=stars&per_page=10&page=${newVal}`);
     }
   };
+
+  useEffect(() => {
+    if(sessionStorage.length !== 0) {
+      setSearchRequest(getSearchRequestFromSession());
+      setPageNumber(getPageNumberFromSession());
+      setApiSearchString(`?q=${sessionStorage.getItem(`searchRequest`)}&sort=stars&per_page=10&page=${sessionStorage.getItem(`pageNumber`)}`);
+    }
+  }, []);
 
   useEffect(() => {    
     if((searchRequest === `` && loadingTopTen) || (searchRequest !== `` && loadingResults)) {
       setListTitle(`Loading...`)
     } else if ((searchRequest === `` && errorLoadingTopTen) || (searchRequest !== `` && errorLoadingResults)) {
-      setListTitle(`Error! Check your internet connection and try reloading the page`)
+      setListTitle(`Error! Check your internet access and hit F5.. Or you need to wait due to the API's limits..`)
     } else if (searchRequest === ``) {
       setListTitle(`Top 10 repos with most stars overall`)
     } else if (resultsTotalCount > 100) {
       setListTitle(`Showing top 100 of ${resultsTotalCount} results for searching "${searchRequest}"`)
     } else {
-      setListTitle(`Showing ${resultsTotalCount} results for searching "${searchRequest}"`)
+      setListTitle(`Showing ${resultsTotalCount} result(s) for searching "${searchRequest}"`)
     }
   }, [searchRequest, loadingTopTen, errorLoadingTopTen, loadingResults, errorLoadingResults]);
 
