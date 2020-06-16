@@ -5,11 +5,11 @@ import useJsonFetch from '../utils/useJsonFetch.js';
 
 const RepoPageContainer = ({id}) => {
   const [statusMessage, setStatusMessage] = useState(`Loading...`);
-  const [languagesQueryString, setLanguagesQueryString] = useState(``);
-  const [contributorsQueryString, setContributorsQueryString] = useState(``);
+  const [languagesQuery, setLanguagesQuery] = useState(``);
+  const [contributorsQuery, setContributorsQuery] = useState(``);
 
-  const [loadingLanguages, languages, loagingLanguagesError] = useJsonFetch(`https://api.github.com/repos`, languagesQueryString);
-  const [loadingContributors, contributors, loadingContributorsError] = useJsonFetch(`https://api.github.com/repos`, contributorsQueryString);
+  const [loadingLanguages, languages, loagingLanguagesError] = useJsonFetch(`https://api.github.com/repos`, languagesQuery);
+  const [loadingContributors, contributors, loadingContributorsError] = useJsonFetch(`https://api.github.com/repos`, contributorsQuery);
   const [loadingDetails, details, loadingDetailsError] = useJsonFetch(`https://api.github.com/repositories`, `/${id}`);
 
   const composeLanguagesList = (languages) => {
@@ -28,8 +28,8 @@ const RepoPageContainer = ({id}) => {
   useEffect(() => {
     if(details !== null) {
       const base = `/${details.owner.login}/${details.name}`
-      setLanguagesQueryString(base + `/languages`);
-      setContributorsQueryString(base + `/contributors?q=contributions&order=desc&per_page=10&page=1`)
+      setLanguagesQuery(base + `/languages`);
+      setContributorsQuery(base + `/contributors?q=contributions&order=desc&per_page=10&page=1`)
     }
   },[details]);
 
@@ -58,7 +58,7 @@ const RepoPageContainer = ({id}) => {
         />
         : <h4 style={{marginTop: `26px`}}>{`${statusMessage}`}</h4>
       }
-      <Link style={{color: `crimson`, position: `absolute`, left: `25px`, bottom: `25px`}} to="/">back</Link>
+      <Link style={{color: `teal`, position: `absolute`, left: `25px`, bottom: `25px`}} to="/">back</Link>
     </div>
   );
 };

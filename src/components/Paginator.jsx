@@ -1,6 +1,6 @@
 import React from 'react';
 
-const buttonNames = [`1..10`, `11..20`, `21..30`, `31..40`, `41..50`, `51..60`, `61..70`, `71..80`, `81..90`, `91..100`]
+const BUTTON_NAMES = [`1..10`, `11..20`, `21..30`, `31..40`, `41..50`, `51..60`, `61..70`, `71..80`, `81..90`, `91..100`]
 
 const Paginator = ({pagesCount, pageNumber, onPageNumberChange}) => {
   const buildButtonsArray = (pagesCount, pageNumber) => {
@@ -12,7 +12,7 @@ const Paginator = ({pagesCount, pageNumber, onPageNumberChange}) => {
       buttons.push(
         <li key={i} style={{display: `inline-block`, margin: `10px`}}>
           <div onClick={() => onPageNumberChange(i + 1)} style={(pageNumber === (i + 1)) ? activeStyle : basicStyle}>
-            {buttonNames[i]}
+            {BUTTON_NAMES[i]}
           </div>
         </li>
       )
