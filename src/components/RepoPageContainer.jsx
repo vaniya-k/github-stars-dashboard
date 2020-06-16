@@ -58,7 +58,7 @@ const RepoPageContainer = ({id}) => {
         />
         : <h4 style={{marginTop: `26px`}}>{`${statusMessage}`}</h4>
       }
-      <Link style={{color: `teal`, position: `absolute`, left: `25px`, bottom: `25px`}} to="/">back</Link>
+      <Link style={{color: `indianred`, position: `absolute`, left: `25px`, bottom: `25px`}} to="/">back</Link>
     </div>
   );
 };

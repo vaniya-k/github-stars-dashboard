@@ -1,7 +1,7 @@
 {
   "name": "github-stars-dashboard",
   "version": "1.0.0",
-  "description": "Dashboard with search for GitHub repos with most stars",
+  "description": "Dashboard with search for most starred GitHub repos",
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server"

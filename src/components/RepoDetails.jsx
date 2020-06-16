@@ -10,7 +10,8 @@ const RepoDetails = ({title, forksCount, starsCount, lastCommit, ownerAvaUrl, ow
     <>
       <div style={{display: `flex`, justifyContent: `space-between`}}>
         <section style={{display: `flex`, flexDirection: `column`}}>
-          <h4 style={{marginTop: `0`}}>{title}&nbsp;&nbsp;/&nbsp;&nbsp;&#9733;&nbsp;{starsCount}&nbsp;&nbsp;/&nbsp;&nbsp;forks:&nbsp;{forksCount}&nbsp;&nbsp;/&nbsp;&nbsp;last commit:&nbsp;{lastCommit}&nbsp;&nbsp;</h4>
+          <h4 style={{marginTop: `0`, marginBottom: `10px`}}>{title}</h4>
+          <h4 style={{marginTop: `0`, marginBottom: `10px`}}>&#9733;&nbsp;{starsCount}&nbsp;&nbsp;/&nbsp;&nbsp;forks:&nbsp;{forksCount}&nbsp;&nbsp;/&nbsp;&nbsp;last commit:&nbsp;{lastCommit}&nbsp;&nbsp;</h4>
         
           <div>
             <h4 style={{marginBottom: `10px`, marginTop: `25px`}}>Languages:</h4>
