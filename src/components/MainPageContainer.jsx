@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import SearchField from './SearchField.jsx';
 import List from './List.jsx';
 import Paginator from './Paginator.jsx';
-import {preserveQueryInSession, getSearchRequestFromSession, getPageNumberFromSession} from '../utils/sessionStorageManager.js';
+import {preserveQueryInSession, getSearchRequestFromSession, getPageNumberFromSession, wipeQueryfromSession} from '../utils/sessionStorageManager.js';
 import useJsonFetch from '../utils/useJsonFetch.js';
 import searchResponseAdapter from '../utils/searchResponseAdapter.js';
 
@@ -28,6 +28,7 @@ const MainPageContainer = () => {
       setApiSearchString(`?q=${newVal}&sort=stars&per_page=10&page=1`);
     } else if(newVal !== searchRequest && newVal === ``) {
       resetResultsTotalCount();
+      wipeQueryfromSession();
       setSearchRequest(newVal);
     }
   };

@@ -48,6 +48,7 @@ const RepoPageContainer = ({id}) => {
           contributorsList={composeTopContributorsList(contributors)}
           title={details.name}
           starsCount={details.stargazers_count}
+          forksCount={details.forks_count}
           lastCommit={details.pushed_at.slice(0, 10)}
           ownerAvaUrl={details.owner.avatar_url}
           ownerUrl={details.owner.html_url}

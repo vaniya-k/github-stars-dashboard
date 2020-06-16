@@ -16,4 +16,8 @@ const getPageNumberFromSession = () => {
   }
 }
 
-export {preserveQueryInSession, getSearchRequestFromSession, getPageNumberFromSession};
+const wipeQueryfromSession = () => {
+  sessionStorage.clear();
+}
+
+export {preserveQueryInSession, getSearchRequestFromSession, getPageNumberFromSession, wipeQueryfromSession};

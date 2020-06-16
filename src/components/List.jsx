@@ -2,7 +2,7 @@ import React from 'react';
 
 const LiItem = ({item}) => {
   return(
-  <li>{item.name}&nbsp;&nbsp;/&nbsp;&nbsp;&#9733;&nbsp;{item.starsCount}&nbsp;&nbsp;/&nbsp;&nbsp;forks count:&nbsp;{item.forksCount}&nbsp;&nbsp;/&nbsp;&nbsp;last commit:&nbsp;{item.lastCommit}&nbsp;&nbsp;<a href={item.url} target="_blank">&gt;&gt;</a></li>
+  <li>{item.name}&nbsp;&nbsp;/&nbsp;&nbsp;&#9733;&nbsp;{item.starsCount}&nbsp;&nbsp;/&nbsp;&nbsp;forks:&nbsp;{item.forksCount}&nbsp;&nbsp;/&nbsp;&nbsp;last commit:&nbsp;{item.lastCommit}&nbsp;&nbsp;<a href={item.url} target="_blank">&gt;&gt;</a></li>
   )
 }
 
