@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import MainPageContainer from './components/MainPageContainer.jsx';
-import RepoPageContainer from './components/RepoPageContainer.jsx';
+import App from './components/App.jsx';
 
-ReactDOM.render(< RepoPageContainer id={10270250}/>,document.getElementById(`root`));
+ReactDOM.render(<App/>,document.getElementById(`root`));
 
 //awesome lists 21737465
 //avocode-basics 266959801

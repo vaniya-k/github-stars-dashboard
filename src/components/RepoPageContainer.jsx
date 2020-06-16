@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 import RepoDetails from './RepoDetails.jsx';
 import useJsonFetch from '../utils/useJsonFetch.js';
 
@@ -57,7 +58,7 @@ const RepoPageContainer = ({id}) => {
         />
         : <h4 style={{marginTop: `26px`}}>{`${statusMessage}`}</h4>
       }
-      <a style={{position: `absolute`, left: `25px`, bottom: `25px`}} href="https://github.com/" target="_blank">back</a>
+      <Link style={{color: `crimson`, position: `absolute`, left: `25px`, bottom: `25px`}} to="/">back</Link>
     </div>
   );
 };

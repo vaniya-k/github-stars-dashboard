@@ -1,6 +1,11 @@
 import React from 'react';
 
 const RepoDetails = ({title, forksCount, starsCount, lastCommit, ownerAvaUrl, ownerUrl, ownerName, description, languagesList, contributorsList}) => {
+  const checkContentToShow = (content) => {
+    const returnString = (content === `` || content === null) ? `None specified`: content;
+    return returnString;
+  };
+  
   return (
     <>
       <div style={{display: `flex`, justifyContent: `space-between`}}>
@@ -8,18 +13,18 @@ const RepoDetails = ({title, forksCount, starsCount, lastCommit, ownerAvaUrl, ow
           <h4 style={{marginTop: `0`}}>{title}&nbsp;&nbsp;/&nbsp;&nbsp;&#9733;&nbsp;{starsCount}&nbsp;&nbsp;/&nbsp;&nbsp;forks:&nbsp;{forksCount}&nbsp;&nbsp;/&nbsp;&nbsp;last commit:&nbsp;{lastCommit}&nbsp;&nbsp;</h4>
         
           <div>
-              <h4 style={{marginBottom: `10px`, marginTop: `25px`}}>Languages:</h4>
-              <span>{(languagesList === `` || languagesList === null) ? `None specified` : languagesList}</span>
+            <h4 style={{marginBottom: `10px`, marginTop: `25px`}}>Languages:</h4>
+            <span>{checkContentToShow(languagesList)}</span>
           </div>
 
           <div>
             <h4 style={{marginBottom: `10px`, marginTop: `25px`}}>Description:</h4>
-            <span>{(description === `` || description === null) ? `None specified` : description}</span>
+            <span>{checkContentToShow(description)}</span>
           </div>
 
           <div>
             <h4 style={{marginBottom: `10px`, marginTop: `25px`}}>Top contributors (up to 10):</h4>
-            <span>{contributorsList}</span>
+            <span>{checkContentToShow(contributorsList)}</span>
           </div>
         </section>
         
