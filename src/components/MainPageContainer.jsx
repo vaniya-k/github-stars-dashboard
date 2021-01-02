@@ -77,7 +77,7 @@ const MainPageContainer = () => {
   }, [resultsTotalCount]);
 
   return (
-    <div style={{width: `700px`, height: `350px`, border: `2px solid grey`, padding: `25px`}}>
+    <div style={{width: `700px`, height: `400px`, border: `2px solid grey`, padding: `25px`}}>
       <SearchField onSearchSubmit={handleSearchSubmit}/>
       <List searchRequest={searchRequest} statusMessage={statusMessage} resultsTotalCount={resultsTotalCount} itemsToShow={itemsToShow}/>
       {(pagesCount > 0) && <Paginator pagesCount={pagesCount} pageNumber={pageNumber} onPageNumberChange={handlePageNumberChange}/>}

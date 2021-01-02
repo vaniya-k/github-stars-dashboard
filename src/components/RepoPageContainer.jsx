@@ -42,7 +42,7 @@ const RepoPageContainer = ({id}) => {
   }, [loadingLanguages, loadingContributors, loadingDetails, loagingLanguagesError, loadingDetailsError, loadingContributorsError]);
 
   return (
-    <div style={{position: `relative`, width: `700px`, height: `350px`, border: `2px solid grey`, padding: `25px`}}>
+    <div style={{position: `relative`, width: `700px`, height: `400px`, border: `2px solid grey`, padding: `25px`}}>
       {(details !== null && contributors !== null && languages !== null)
         ? <RepoDetails 
           languagesList={composeLanguagesList(languages)}
